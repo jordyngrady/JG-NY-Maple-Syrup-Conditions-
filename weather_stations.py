@@ -124,27 +124,6 @@ station_monthly = station_monthly[new_order]
 # Saving station_monthly
 station_monthly.to_csv("station_monthly.csv")
 
-# ------------------------------------------------------------
-# Finding % of Ideal Weather Days for Each Station, BY YEAR 
-# NOTES: This is basically the same process as by month, check above <3
-culled_data['YEAR'] = pd.to_datetime(culled_data['DATE']).dt.year.astype(str)
-total_days_year = culled_data.groupby(['STATION', 'YEAR'])['IDEAL'].count().reset_index(name='Total')
-ideal_days_year = culled_data[culled_data['IDEAL'] == 1].groupby(['STATION', 'YEAR'])['IDEAL'].count().reset_index(name='Ideal')
-merged_year = pd.merge(total_days_year, ideal_days_year, on=['STATION', 'YEAR'], how='left')
-merged_year['Ideal'] = merged_year['Ideal'].fillna(0)
-merged_year['Percent_Ideal'] = (merged_year['Ideal'] / merged_year['Total']) * 100
-station_yearly = merged_year.pivot(index='STATION', columns='YEAR', values='Percent_Ideal').reset_index()
-station_yearly = pd.merge(
-    station_yearly,
-    all_stations[['STATION', 'NAME', 'LATITUDE', 'LONGITUDE']],
-    on='STATION',
-    how='left'
-)
-station_yearly["ZIP"] = station_yearly["NAME"].map(zip_list)
-station_yearly = station_yearly.drop(columns=["STATION","NAME", "LATITUDE", "LONGITUDE"])
-print(station_yearly.columns)
-station_yearly.to_csv("Zip_Conditions.csv")
-
 # Station Locations 
 station_locations = all_stations.copy()
 station_locations = station_locations.dropna(subset=['LATITUDE', 'LONGITUDE']).reset_index(drop=True)

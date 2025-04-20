@@ -35,6 +35,7 @@ producer_conditions = producer_conditions.rename(columns={
 
     # SAving to CSV
 producer_conditions.to_csv("producers_idealconditions.csv")
+print(producers_with_data.shape)
 
 # ---------- LINE GRAPH 
 value_vars = [col for col in producer_conditions.columns if '-' in col]
@@ -67,6 +68,7 @@ g.map_dataframe(
     x="Month_Label",
     y="Percent_Ideal",
     hue="PRODUCER",
+    errorbar=None,
     legend=False,
     linewidth=1.5,
     marker='o'

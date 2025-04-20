@@ -9,3 +9,4 @@ zip_counts = ny_producers["ZIP"].value_counts().reset_index()
 zip_counts.columns = ["ZIP", "Producers"]
 zip_counts.to_csv("producersbyzip.csv", index=False)
 
+print(ny_producers.shape)
