@@ -49,4 +49,4 @@ ideal5year['Percent_Ideal'] = (ideal5year['Ideal_Days'] / ideal5year['Total_Days
 # SAVE WEATHER DATA
 ideal5year.to_csv("ideal5year.csv", index=False)
 
-print(ideal5year)
+print(ideal5year.head())

@@ -36,6 +36,7 @@ producer_conditions = producer_conditions.rename(columns={
     # SAving to CSV
 producer_conditions.to_csv("producers_idealconditions.csv")
 print(producers_with_data.shape)
+print(producers_conditions.head)
 
 # ---------- LINE GRAPH 
 value_vars = [col for col in producer_conditions.columns if '-' in col]
@@ -85,8 +86,9 @@ for ax in g.axes.flat:
 plt.subplots_adjust(top=0.85)
 g.fig.suptitle("% of Days with Ideal Conditions for Maple Production, By Month and Producer (2019–2023)", fontsize=16)
 plt.tight_layout()
-plt.show()
 plt.savefig("ideal_conditions_lineplot.png", dpi=300)
+plt.show()
+
 
 # ---------- BOX & WHISKERS 
 
@@ -133,6 +135,7 @@ g.set(ylim=(0, 100))
 plt.subplots_adjust(top=0.85)
 g.fig.suptitle("Distrbution of Ideal Conditions for Maple Production, By Month (2019–2023)", fontsize=16)
 plt.tight_layout()
-plt.show()
 plt.savefig("ideal_conditions_boxplot.png", dpi=300)
+plt.show()
+
 
